@@ -45,6 +45,26 @@ deleteListButton.addEventListener('click', e => {
   saveAndRender()
 })
 
+newListForm.addEventListener('submit', e => {
+  e.preventDefault()
+  const listName = newListInput.value
+  if (listName == null || listName === '') return
+  const list = createList(listName)
+  newListInput.value = null
+  lists.push(list)
+  saveAndRender()
+})
+
+newTaskForm.addEventListener('submit', e => {
+  e.preventDefault()
+  const taskName = newTaskInput.value
+  if (taskName == null || taskName === '') return
+  const task = createTask(taskName)
+  newTaskInput.value = null
+  const selectedList = lists.find(list => list.id === selectedListId)
+  selectedList.tasks.push(task)
+  saveAndRender()
+})
 
 function createList(name) {
   return { id: Date.now().toString(), name: name, tasks: [] }
