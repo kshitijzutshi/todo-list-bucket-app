@@ -34,6 +34,13 @@ tasksContainer.addEventListener('click', e => {
 })
 
 
+clearCompleteTasksButton.addEventListener('click', e => {
+  const selectedList = lists.find(list => list.id === selectedListId)
+  selectedList.tasks = selectedList.tasks.filter(task => !task.complete)
+  saveAndRender()
+})
+
+
 
 function createList(name) {
   return { id: Date.now().toString(), name: name, tasks: [] }
